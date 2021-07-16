@@ -4,17 +4,18 @@ using namespace std;
 typedef vector<int> arrRef;
 
 arrRef arr = {1, 2, 3, 4, 5};
-arrRef arr1 = {1,2,3,4,5,6,7,4,5,6,2,3,5};
+arrRef arr1 = {1,2,3,4,5,6,7,4,5,6,2,3,88};
 arrRef arr2 = {7, 6, 4, 3, 1};
 class ArrOpt
 {
 public:
     void handle();
-
 private:
     int removeDuplicate(arrRef &);
     int maxProfit(arrRef &);
     void rotate(arrRef &, int);
+protected:
+    void turnArr(arrRef &, int, int);
 };
 int ArrOpt::removeDuplicate(arrRef &arr)
 {
@@ -81,25 +82,17 @@ int ArrOpt::maxProfit(arrRef &arr)
 }
 
 void ArrOpt::rotate(arrRef &arr, int k){
-     int leg = arr.size();
-     int distance = k % leg;
+     int end = arr.size();
+     int distance = k % end;
      if(distance == 0){
+         cout << "原样输出" << endl;
          return;
      }
-    auto begin = arr.begin();
-    auto end = arr.end();
-    auto bounder = begin + leg - distance;
-    if(leg - distance > distance){
-        arr.insert(begin,distance,0);
-        auto begin = arr.begin();
-        auto end = arr.end();
-        int leg = arr.size();
-        auto bounder = begin + leg - distance;
-        swap_ranges(bounder, end, begin);
-        arr.erase(end - distance, end);
-    }else{
-        swap_ranges(bounder, end, begin - 1);
-    }
+     int leg = end - 1;
+    turnArr(arr,0, leg);
+    turnArr(arr,0,distance-1);
+    turnArr(arr,distance,leg);
+   
     for (auto &&i : arr)
     {
       cout << i << endl;   
@@ -107,8 +100,20 @@ void ArrOpt::rotate(arrRef &arr, int k){
     
 
 }
+
+// 翻转数组
+void ArrOpt::turnArr(arrRef &arr, int begin, int end){
+    while (begin < end)
+    {
+        int tem = arr[begin] ;
+        arr[begin] = arr[end];
+        arr[end] = tem;
+        begin++;
+        end--;
+    }
+}
+
 void ArrOpt::handle()
 {
-    rotate(arr1, 9);
-
+    rotate(arr1,9);
 }
