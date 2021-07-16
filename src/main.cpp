@@ -7,8 +7,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	// 打印utf-8的中文格式
-	SetConsoleOutputCP(936);
-	cout << "打发撒3eeeee4"<< endl;
+	SetConsoleOutputCP(65001);
 	ArrOpt arrOpt;
 	arrOpt.handle();
 	cin.get();

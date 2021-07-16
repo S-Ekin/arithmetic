@@ -4,7 +4,7 @@ using namespace std;
 typedef vector<int> arrRef;
 
 arrRef arr = {1, 2, 3, 4, 5};
-arrRef arr1 = {7, 1, 5, 3, 6, 4};
+arrRef arr1 = {1,2,3,4,5,6,7,4,5,6,2,3,5};
 arrRef arr2 = {7, 6, 4, 3, 1};
 class ArrOpt
 {
@@ -14,6 +14,7 @@ public:
 private:
     int removeDuplicate(arrRef &);
     int maxProfit(arrRef &);
+    void rotate(arrRef &, int);
 };
 int ArrOpt::removeDuplicate(arrRef &arr)
 {
@@ -78,10 +79,36 @@ int ArrOpt::maxProfit(arrRef &arr)
 
     return sellCount - buyCount;
 }
+
+void ArrOpt::rotate(arrRef &arr, int k){
+     int leg = arr.size();
+     int distance = k % leg;
+     if(distance == 0){
+         return;
+     }
+    auto begin = arr.begin();
+    auto end = arr.end();
+    auto bounder = begin + leg - distance;
+    if(leg - distance > distance){
+        arr.insert(begin,distance,0);
+        auto begin = arr.begin();
+        auto end = arr.end();
+        int leg = arr.size();
+        auto bounder = begin + leg - distance;
+        swap_ranges(bounder, end, begin);
+        arr.erase(end - distance, end);
+    }else{
+        swap_ranges(bounder, end, begin - 1);
+    }
+    for (auto &&i : arr)
+    {
+      cout << i << endl;   
+    }
+    
+
+}
 void ArrOpt::handle()
 {
-    cout << maxProfit(arr) << endl;
-    cout << maxProfit(arr1) << endl;
-    cout << maxProfit(arr2) << endl;
-    cout << "撒旦发射点erer"<< endl;
+    rotate(arr1, 9);
+
 }
