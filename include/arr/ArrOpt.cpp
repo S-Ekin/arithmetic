@@ -1,19 +1,27 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
+#include <unordered_map>
 using namespace std;
 typedef vector<int> arrRef;
 
-arrRef arr = {1, 2, 3, 4, 5};
-arrRef arr1 = {1,2,3,4,5,6,7,4,5,6,2,3,88};
+arrRef arr = {1, 2, 2, 2, 3, 4, 3, 3, 3, 5};
+arrRef arr1 = {2, 14, 18, 22, 22};
 arrRef arr2 = {7, 6, 4, 3, 1};
+arrRef arr3 = {7, 6, 7, 3, 6 };
 class ArrOpt
 {
 public:
     void handle();
+
 private:
     int removeDuplicate(arrRef &);
     int maxProfit(arrRef &);
     void rotate(arrRef &, int);
+    bool containsDuplicate(arrRef &);
+    int singleNumber(arrRef &);
+
 protected:
     void turnArr(arrRef &, int, int);
 };
@@ -81,31 +89,32 @@ int ArrOpt::maxProfit(arrRef &arr)
     return sellCount - buyCount;
 }
 
-void ArrOpt::rotate(arrRef &arr, int k){
-     int end = arr.size();
-     int distance = k % end;
-     if(distance == 0){
-         cout << "原样输出" << endl;
-         return;
-     }
-     int leg = end - 1;
-    turnArr(arr,0, leg);
-    turnArr(arr,0,distance-1);
-    turnArr(arr,distance,leg);
-   
+void ArrOpt::rotate(arrRef &arr, int k)
+{
+    int end = arr.size();
+    int distance = k % end;
+    if (distance == 0)
+    {
+        cout << "原样输出" << endl;
+        return;
+    }
+    int leg = end - 1;
+    turnArr(arr, 0, leg);
+    turnArr(arr, 0, distance - 1);
+    turnArr(arr, distance, leg);
+
     for (auto &&i : arr)
     {
-      cout << i << endl;   
+        cout << i << endl;
     }
-    
-
 }
 
 // 翻转数组
-void ArrOpt::turnArr(arrRef &arr, int begin, int end){
+void ArrOpt::turnArr(arrRef &arr, int begin, int end)
+{
     while (begin < end)
     {
-        int tem = arr[begin] ;
+        int tem = arr[begin];
         arr[begin] = arr[end];
         arr[end] = tem;
         begin++;
@@ -113,7 +122,65 @@ void ArrOpt::turnArr(arrRef &arr, int begin, int end){
     }
 }
 
+bool ArrOpt::containsDuplicate(arrRef &arr)
+{
+    auto leg = arr.size();
+    arrRef hashArr(leg, 0);
+    int count0 = 0;
+    for (int begin = 0; begin < leg; begin++)
+    {
+        int &val = arr[begin];
+        if (val == 0)
+        {
+            if (count0 > 0)
+            {
+                return true;
+            }
+            count0++;
+        }
+        else
+        {
+
+            int hasIndex = val % leg;
+            if (hasIndex < 0)
+            {
+                hasIndex += leg;
+            }
+
+            if (!hashArr[hasIndex])
+            {
+                hashArr[hasIndex] = val;
+            }
+            else
+            {
+                while (hashArr[hasIndex])
+                {
+                    if (hashArr[hasIndex] == val)
+                    {
+                        return true;
+                    }
+                    hasIndex = (hasIndex + 1) % leg;
+                }
+                hashArr[hasIndex] = val;
+            }
+        }
+    }
+
+    return false;
+}
+
+int ArrOpt::singleNumber(arrRef &arr){
+    int res = 0;
+    for (auto &&i : arr)
+    {
+        res = res ^ i;
+    }
+    
+    return res;
+}
+
 void ArrOpt::handle()
 {
-    rotate(arr1,9);
+    int res = singleNumber(arr3);
+    cout << res << endl;
 }
