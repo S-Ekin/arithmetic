@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": true,
+      "externalConsole": false,
       "setupCommands": [
         {
           "description": "为 gdb 启用整齐打印",
@@ -21,7 +21,7 @@
       //  "miDebuggerPath": "gdb.exe", 这样写会找不到这个路径
       "miDebuggerPath": "D:\\mingw64\\bin\\gdb.exe",
       "program": "${workspaceFolder}/output/main.exe",
-      "preLaunchTask": "build"
+      "preLaunchTask": "build & run"
     }
   ]
 }

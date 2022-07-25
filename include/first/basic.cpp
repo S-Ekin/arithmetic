@@ -5,8 +5,22 @@
  * @Last Modified time: 2022-07-25 16:58:57 
  */
 #include <iostream>;
-#define N 50;
+#define Maxsize 50;
 using namespace std;
+const int N = Maxsize;
+
+void test(){
+	int a = 4;
+	int b = 5;
+	int f = 111;
+
+	int *c =&b;
+	int *d =&f;
+	b = *d;
+	cout << *c * 3 <<endl;
+}
+
+
 
 void Reverse(int R[], int l, int r){
 	int i, j;
@@ -30,7 +44,7 @@ void RCR(int R[], int n, int p){
 	}
 }
 
-int main (){
+int main1 (){
 	int L, i;
 	int n;
 	int R[N];
