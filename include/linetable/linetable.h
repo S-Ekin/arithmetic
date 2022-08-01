@@ -12,7 +12,7 @@ typedef struct {
 // 单链表
 typedef struct LNode {
 	int data;
-	struct Lnode *next;
+	struct LNode *next;
 } LNode;
 
 // 双链表

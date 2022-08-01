@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../include/first/SeqList.cpp"
+#include "../include/linetable/SeqList.cpp"
 #include <windows.h>
 using namespace std;
 
