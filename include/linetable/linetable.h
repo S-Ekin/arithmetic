@@ -1,5 +1,5 @@
 // #ifndef MaxSize
-#pragma once;
+#pragma once
 
 #define MAXA 50
 
