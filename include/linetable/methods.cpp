@@ -140,7 +140,50 @@ void testSubtraction(){
 	cinOutArr(a);
 }
 
+
+// 有N个个位正整数存放在int型数组A[0，……，N—1]中， N为已定义的常量且N<9，数组A]的长度为N，另给一个int型变量i，要求只用上述变量（A[0]～A[N—1]与i，这N+1个整型变量）写一个算法，找出这N个整数中的最小者，并且要求不能破坏数组A[]中的数据。
+
+int findMinNum (){
+	int N = 9;
+	int arr[N] = {9,2,3,5,5,6,8,8,9};
+	int i = arr[0];
+
+	while (i < N*10)
+	{
+		if(arr[i/10] < i%10){
+			i = i - i % 10 + arr[i/10];
+		}
+		i+=10;
+	}
+	return i%10;
+}
+
+// 
+void compare(float A[], float B[], int n, int m, int & res ){
+	int i =0;
+	while (A[i]== B[i] && (i<n || i<m))
+	{
+		i++;
+	}
+	
+	if(n-i==0){
+		res = i == m ? 0 : 1;
+	} else	{
+		if(i == m || A[i] > B[i]){
+			res = 2;
+		}else {
+			res =  1;
+		}
+	}
+
+
+}
+
 int main(){
-	testSubtraction();
+	float A[4] = {1.2,1.3,1.5,1.7};
+	float B[5] = {1.2,1.3,1.5,1.7,1.8};
+	int res;
+	compare(A,B,4,5, res);
+	cout << res <<endl;
 	return 0;
 }
