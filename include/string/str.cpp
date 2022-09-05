@@ -9,9 +9,10 @@ int StrAssign(Strs &str, char *ch)
 	if (str.ch)
 	{
 		free(str.ch);
+		str.ch = NULL;
 	}
 	// 先获取长度
-	int len;
+	int len = 0; // 要是不给初始值0,len会有一个默认值，并且是栈给的一个随机值
 	char *c = ch;
 	while (*c)
 	{
@@ -23,7 +24,7 @@ int StrAssign(Strs &str, char *ch)
 	{
 		str.length = 0;
 		str.ch = NULL;
-		return 1;
+		return 1; 
 	}
 	else
 	{
@@ -44,29 +45,87 @@ int StrAssign(Strs &str, char *ch)
 	}
 }
 
-void init()
-{
-	int L = 40;
-	Strs S;
-	S.length = L;
-	S.ch = (char *)malloc((L + 1) * sizeof(char));
-	cout << S.length << endl;
-	free(S.ch);
-	char k[] = "asdfafas";
-	char *c = "abcd";
-	char *a = k;
-	Strs b;
-	b.ch = (char *)malloc(9 * sizeof(char));
-	StrAssign(b, a);
-	cout << b.length << " " << b.ch << " " << b.ch[0] <<endl;
+// 串的比较
+int strCompare(Strs s1, Strs s2){
 
-	Strs d;
-	d.length = 45;
-	d.ch =k;
-	cout << d.ch << " ch"<<endl;
+	for (int i = 0; i < s1.length || i < s2.length; i++)
+	{
+		if(s1.ch[i]!= s2.ch[i]){
+			return s1.ch[i] - s2.ch[i];
+		}
+	}
+	return s1.length - s2.length;
 }
-int main()
-{
-	init();
-	return 0;
+
+// 串的连接
+int strContact(Strs & str, Strs s1, Strs s2){
+	if(str.ch){
+		free(str.ch);
+	}
+	// 申请自己的空间, 注意 + 1
+	str.ch = (char *)malloc((s1.length + s2.length + 1)*sizeof(char));
+	// 判断是否申请成功
+	if(!str.ch){
+		return 0;
+	}
+	// 开始一个个复制
+	int i  = 0;
+	while (i< s1.length)
+	{
+		str.ch[i] = s1.ch[i];
+		i++;
+	}
+	int j  = 0;
+	while (j< s2.length)
+	{
+		str.ch[i + j] = s2.ch[j];
+		j++;
+	}
+
+	str.length = i + j;
+	return 1; 
 }
+
+// 串的子串
+// pos：子串开始的位置
+int subStr(Strs & sub, Strs s, int pos, int leg){
+	//先判断	参数的合法性
+	if(pos <0 || leg < 0 || (pos + leg) > s.length || pos >= s.length){
+		return 0;
+	}
+
+	if(sub.ch){
+		free(sub.ch);
+		sub.ch = NULL;
+	}
+
+	if(leg == 0){
+		sub.ch = NULL;
+		sub.length = 0;
+		return 1;
+	}
+
+	int j =0;
+	sub.ch = (char *)malloc(sizeof(char) * (leg + 1));
+	while (j < leg)
+	{
+		sub.ch[j] = s.ch[pos + j];
+		j++;
+	}
+	sub.ch[leg] = '\0';
+	sub.length = leg;
+	return 1;
+	
+}
+
+// 清空串
+
+int clarnStr(Strs &s){
+	if(s.ch){
+		free(s.ch);
+		s.ch = NULL;
+	}
+	s.length = 0;
+	return 1;
+}
+
