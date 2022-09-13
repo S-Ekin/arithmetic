@@ -7,6 +7,7 @@
 #include "./mystring.h"
 #include "./str.cpp"
 #include <iostream>
+#include "./methods.cpp"
 using namespace std;
 
 int i1;
@@ -53,6 +54,9 @@ void strContactT()
 }
 int main()
 {
-	strContactT();
+	char s[] = {'i','i','o', 'o'};
+
+	matchPattern(s);
+	// strContactT();
 	return 0;
 }
