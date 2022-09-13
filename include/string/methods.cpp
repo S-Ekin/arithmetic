@@ -14,7 +14,6 @@ int matchPattern(char s[])
 	while (item != '\0' | i < 100)
 	{
 		i++;
-		s++;
 		item = *s;
 		if (item == 'i')
 		{
@@ -31,6 +30,7 @@ int matchPattern(char s[])
 			}
 			arr.top--;
 		}
+		s++;
 	}
 
 	if (arr.top > -1)

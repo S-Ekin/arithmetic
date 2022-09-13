@@ -54,7 +54,7 @@ void strContactT()
 }
 int main()
 {
-	char s[] = {'i','i','o', 'o'};
+	char s[] = {'i','i','o','i','o','i', 'o','o','\0'};
 
 	matchPattern(s);
 	// strContactT();
