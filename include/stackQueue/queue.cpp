@@ -52,7 +52,7 @@ int isQueueEmpty(LiQueue *lqu){
 		return 0;
 	}
 }
-
+// 入队
 int enQueue(LiQueue *lqu, int x){
 	QNode *p = (QNode *)malloc(sizeof(QNode));
 	p->next =NULL;
@@ -66,6 +66,7 @@ int enQueue(LiQueue *lqu, int x){
 	}
 }
 
+// 出队
 int deQueue(LiQueue *lqu, int & x){
 	QNode *p;
 
