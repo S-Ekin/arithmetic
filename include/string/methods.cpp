@@ -1,7 +1,6 @@
 #include "../stackQueue/stackQueue.h"
 #include "./mystring.h"
 #include <iostream>
-
 using namespace std;
 
 // 1. IO匹配判断，类似括号"()"的匹配
@@ -81,11 +80,31 @@ int queueNoFrontDe(QNode *&rear, int &x){
 
 typedef struct 
 {
-	CircleNode * front;
-	CircleNode * rear;
+	int data[MAXSIZE];
+	int rear;
+	int front;
 } CircleQue;
 
-typedef struct CircleNode {
-	int data;
-	struct CircleNode * next;
-} CircleNode;
+
+int circleInsertFromFront(CircleQue & que, int x){
+	// 判断是否溢出
+	// if((que.rear + 1 + MAXSIZE ) % MAXSIZE == que.front){
+	if((que.front - 1 + MAXSIZE ) % MAXSIZE == que.rear){
+		return 0;
+	}
+	que.data[que.front] = x;
+	que.front = (que.front - 1 + MAXSIZE) % MAXSIZE; // 注意正常的写法 
+	// que.data[que.front]= x; 错误，注意队首指针位置中不放数据
+	return 1;
+}
+
+int circleDeFromRear(CircleQue & que, int &x){
+	// 判断是否溢出
+	if(que.front == que.rear ){
+		return 0;
+	}
+	x = que.data[que.rear];
+	que.rear = (que.rear - 1 + MAXSIZE) % MAXSIZE;
+	return 1;
+}
+
