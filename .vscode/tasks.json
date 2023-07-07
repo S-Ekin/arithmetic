@@ -7,7 +7,10 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-fexec-charset=GBK", // 处理mingw中文编码问题
+                "-finput-charset=UTF-8",// 处理mingw中文编码问题
                 "${file}",
+                // "${fileDirname}\\*.cpp", // 编译当前文件所属的文件夹下的所有 .cpp 文件。防止vscode 不能识别当前文件所依赖的头文件里那些 .cpp源文件而没有编译 ，而导致报错 undefined reference to 。但是直接 引入 .cpp文件是可以编译到的
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
