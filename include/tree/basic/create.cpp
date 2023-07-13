@@ -13,23 +13,18 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-// 二叉树得构建
+// 利用前序遍历构建二叉树得
 void createBT(BTNode *& tree){
-
-	char str;
+	int str;
 	cin >> str;
-	BTNode *p =(BTNode *)malloc(sizeof(BTNode));
-	// BTNode *p = new BTNode;
-
-	if(str == '#'){
-		p = nullptr;
-	}else {
-		p->data = str;
-		createBT(p->lchild);
-		createBT(p->rchild);
+	if(str != 0) {
+		tree =(BTNode *)malloc(sizeof(BTNode));
+		tree->data = str;
+		cout << str <<" 左子树：" << endl;
+		createBT(tree->lchild);
+		cout << str <<" 右子树：" << endl;
+		createBT(tree->rchild);
+	} else {
+		tree = nullptr;
 	}
-}
-
-void test(){
-	cout << "er" << endl;
 }

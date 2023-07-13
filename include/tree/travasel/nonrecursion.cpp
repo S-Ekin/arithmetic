@@ -6,17 +6,22 @@
  */
 #include "../basic/create.cpp"
 #include <iostream>
+#include <windows.h>
 using std::cout;
 using std::endl;
 
 // 非递归后序遍历
 void noneRePostVist(){
-	test();
+	
 }
 
 
 int main(int argc, char const *argv[])
 {
+	BTNode *tree;
+	cout << "根结点：" << endl;
+	createBT(tree);
+	cout << tree->lchild->data << endl;
 	noneRePostVist();
 	return 0;
 }
