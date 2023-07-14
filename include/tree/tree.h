@@ -13,5 +13,7 @@ typedef struct BTNode
 	int data;
 	struct BTNode *lchild;
 	struct BTNode *rchild;
+	// 赋值初始值
+	BTNode():data(),lchild(nullptr), rchild(nullptr){}
 } BTNode;
 
