@@ -28,7 +28,7 @@ void midVist(BTNode * tree){
 		return;
 	}
 	midVist(tree->lchild);
-	cout << tree->data << endl;
+	cout << tree-> data << " ";
 	midVist(tree->rchild);
 
 }
@@ -41,27 +41,4 @@ void postVist(BTNode * tree){
 	postVist(tree->lchild);
 	postVist(tree->rchild);
 	cout << tree->data << " ";
-
 }
-//层次遍历
-void levVist(BTNode * tree){
-	int top = 0;
-	BTNode * nodeArr[MaxSize] = {tree};
-	int leg = 1;
-
-	while (leg && top > -1)
-	{
-		leg--;
-		BTNode *cur = nodeArr[top--];
-		cout << cur->data << " ";
-		if(cur->rchild){
-			nodeArr[++top] = cur->rchild;
-			leg++;
-		}
-		if(cur->lchild){
-			nodeArr[++top] = cur->lchild;
-			leg++;
-		}
-	}
-	
-}	
