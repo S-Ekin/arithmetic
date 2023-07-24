@@ -9,6 +9,7 @@
 #include "./travasel/nonrecursion.cpp"
 #include "./travasel/recursion.cpp"
 #include "./travasel/levVist.cpp"
+#include "./problem/search.cpp"
 using std::cout;
 using std::endl;
 
@@ -30,9 +31,16 @@ void visit(){
 	cout << tree2->data <<( res2 ? "true" : "false") << endl;
 }
 
+void test(){
+	BTNode *tree = new BTNode;
+	createBTByArr(tree);
+	int h = getBTHeight(tree);
+	cout << "高度:"<< h << endl;
+}
+
 
 int main(){
-	visit();
+	test();
 	system("pause");
 	return 0;
 }

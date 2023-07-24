@@ -32,7 +32,7 @@ void createBTByCin(BTNode *& tree){
 // 通过数组建立完全二叉树
 void createBTByArr(BTNode *& tree){
 	int arrleg = 17;
-	int arr[arrleg] = {1,0,3,4,0,6,7,8,9,10,0,12,0,0,15,0,17};
+	int arr[arrleg] = {1,2,3,4,0,6,7,8,9,10,0,12,0,0,15,0,17};
 	BTNode * nodeArr[arrleg] = {};
 	nodeArr[0] = tree;
 
@@ -79,5 +79,23 @@ void createBTByArr(BTNode *& tree){
 			
 		}
 	}
+
+}
+
+// 根据 前序和中序数组 构造二叉树
+void createBTByTravaselArr(BTNode *& tree){
+  int leg = 8;
+	int preArr[leg] = {1,2,4,9,5,3,7,14};
+	int midArr[leg] = {4,9,2,5,1,3,14,7};
+
+	BTNode *sqList[MaxSize] = {tree};
+	int top = 0;
+  int par = 0;
+	while (top > -1)
+	{
+		/* code */
+
+	}
+	
 
 }
