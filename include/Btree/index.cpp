@@ -33,9 +33,11 @@ void visit(){
 
 void test(){
 	BTNode *tree = new BTNode;
-	createBTByArr(tree);
-	int h = getBTHeight(tree);
-	cout << "高度:"<< h << endl;
+	nonReCreateBTByTravasel(tree);
+	preVist(tree);
+	cout << endl;
+	midVist(tree);
+	cout << endl;
 }
 
 

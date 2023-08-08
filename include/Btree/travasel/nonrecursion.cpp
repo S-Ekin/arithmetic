@@ -2,6 +2,9 @@
  * @author: SEKin 
  * @Date: 2023-04-24 16:37:17 
  * @description:  二叉树非递归遍历  栈实现
+ * 递归与非递归之间的转化，重要的几点
+ * 必须使用【栈】来模拟
+ * 栈保存的对象就算递归函数的参数。注意多个参数的情况
  * @Last Modified time: 2023-04-24 16:37:17 
  */
 #include <iostream>
@@ -67,13 +70,13 @@ void noneReMidVist(BTNode * tree){
 	BTNode *cur = tree;
 	while (top > -1 || cur)
 	{
-		while (cur)
+		while (cur) //添加左子树
 		{
 			nodeArr[++top] = cur;
 			cur = cur->lchild;
 		}
 
-		if(top > -1){
+		if(top > -1){//消费栈里的内容，并转换方向到右子树
 			cur = nodeArr[top--];
 			cout << cur->data << " ";
 			cur = cur->rchild; //避免了再次轮回时，又添加左子树

@@ -82,20 +82,119 @@ void createBTByArr(BTNode *& tree){
 
 }
 
-// 根据 前序和中序数组 构造二叉树
-void createBTByTravaselArr(BTNode *& tree){
-  int leg = 8;
-	int preArr[leg] = {1,2,4,9,5,3,7,14};
-	int midArr[leg] = {4,9,2,5,1,3,14,7};
 
-	BTNode *sqList[MaxSize] = {tree};
-	int top = 0;
-  int par = 0;
+void mapTree(int start, int end, int midArr[], int preArr[], int preParIndex, BTNode *& parNode) {
+		if(end - start < 1){
+			return;
+		}
+
+		int leftChildNum = 0, midParIndex = -1;
+		int parVal = preArr[preParIndex];
+
+		// 中序里找到父节点
+		for (size_t i = start; i <= end; i++)
+		{
+			int item = midArr[i];
+			if(item == parVal){
+				midParIndex = i;
+				break;
+			} else {
+				leftChildNum++;
+			}
+		}
+
+		if(midParIndex - start > 0){ // 存在左子树
+			BTNode * left = new BTNode();
+			int leftIndex = preParIndex + 1;
+			left->data=preArr[leftIndex];
+			parNode->lchild = left;
+			mapTree(start, midParIndex - 1, midArr, preArr, leftIndex, left);
+		}
+
+		if(end - midParIndex > 0){// 存在右子树
+			BTNode * right = new BTNode();
+			int rightIndex = preParIndex + 1 + leftChildNum;
+			right->data=preArr[rightIndex];
+			parNode->rchild = right;
+			mapTree(midParIndex + 1, end, midArr, preArr, rightIndex, right);
+		}
+	}
+
+// 根据 前序和中序数组 递归构造二叉树
+void createBTByTravasel(BTNode *& tree){
+  	int leg = 8;
+	int preArr[leg] = {1,2,4,9,5,3,7,14};
+	cout << "原前序：1 2 4 9 5 3 7 14" <<endl;
+	int midArr[leg] = {4,9,2,5,1,3,14,7};
+	cout << "原中序：4 9 2 5 1 3 14 7" <<endl;
+
+	tree->data = preArr[0];
+	mapTree(0, leg - 1, midArr, preArr, 0, tree);
+}
+
+// 根据 前序和中序数组 非递归构造二叉树
+void nonReCreateBTByTravasel(BTNode *& tree){
+  	int leg = 8;
+	int preArr[leg] = {1,2,4,9,5,3,7,14};
+	cout << "1 2 4 9 5 3 7 14" <<endl;
+	int midArr[leg] = {4,9,2,5,1,3,14,7};
+	tree->data = preArr[0];
+
+	int top = -1;
+	int stackList[MaxSize][3]= {};
+	BTNode *stackBTList[MaxSize]= {};
+	++top;
+	stackList[top][0] = 0;
+	stackList[top][1] = leg - 1;
+	stackList[top][2] = 0;
+	stackBTList[top] = tree;
+
 	while (top > -1)
 	{
-		/* code */
+		int *indexArrs = stackList[top];
+		int start = indexArrs[0];
+		int end = indexArrs[1];
+		int preParIndex = indexArrs[2];
+		BTNode * parNode = stackBTList[top];
+		top--;
 
+		int parVal = preArr[preParIndex];
+		int leftChildNum =0;
+    	int midParIndex = 0;
+		for (size_t i = start; i <= end; i++)
+		{
+			int item = midArr[i];
+			if(item == parVal){
+				midParIndex = i;
+				break;
+			} else {
+				leftChildNum++;
+			}
+		}
+		
+		if(end - midParIndex > 0){// 存在右子树
+			BTNode * right = new BTNode();
+			int rightIndex = preParIndex + 1 + leftChildNum;
+			right->data=preArr[rightIndex];
+			parNode->rchild = right;
+			
+			top++;
+			stackList[top][0] = midParIndex + 1;
+			stackList[top][1] = end;
+			stackList[top][2] = rightIndex;
+			stackBTList[top] = right;
+		}
+
+		if(midParIndex - start > 0){ // 存在左子树
+			BTNode * left = new BTNode();
+			int leftIndex = preParIndex + 1;
+			left->data=preArr[leftIndex];
+			parNode->lchild = left;
+			top++;
+			stackList[top][0] = start;
+			stackList[top][1] = midParIndex - 1;
+			stackList[top][2] = leftIndex;
+			stackBTList[top] = left;
+		}
 	}
-	
-
 }
