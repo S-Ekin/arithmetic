@@ -32,7 +32,7 @@ void createBTByCin(BTNode *& tree){
 // 通过数组建立完全二叉树
 void createBTByArr(BTNode *& tree){
 	int arrleg = 17;
-	int arr[arrleg] = {1,2,3,4,0,6,7,8,9,10,0,12,0,0,15,0,17};
+	int arr[arrleg] = {1,2,3,4,0,6,7,8,9,0,11};
 	BTNode * nodeArr[arrleg] = {};
 	nodeArr[0] = tree;
 

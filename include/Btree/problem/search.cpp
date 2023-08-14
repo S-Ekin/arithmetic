@@ -64,3 +64,45 @@ int getBTHeight(BTNode *tree)
   return lev;
 }
 
+// 判定是否是完全二叉树 找到最后一个节点的索引及其高度
+bool isCompeleteBT(BTNode *tree){
+	int rear = 0 , front = 0;
+	BTNode *sqList[MaxSize] = {};
+	BTNode *treeArr[20] ={};
+	int leg = 0;
+
+	front = (front + 1)%MaxSize;
+	sqList[front] = tree;
+	treeArr[leg] = tree;
+
+	while (front!=rear)
+	{
+		rear = (rear + 1)%MaxSize;
+		BTNode * p = sqList[rear];
+		if(p->lchild){
+			front = (front + 1)%MaxSize;
+			sqList[front] = p->lchild;
+			leg++;
+			treeArr[leg] = p->lchild;
+		}
+		
+		if(p->rchild){
+			front = (front + 1)%MaxSize;
+			sqList[front] = p->rchild;
+			leg++;
+			treeArr[leg] = p->rchild;
+		}
+	}
+
+	int last = leg + 1;
+	int par = last / 2 - 1;
+
+	if(treeArr[par]->rchild == treeArr[leg] && last % 2 != 0){
+		return true;
+	}else if(last % 2 ==0 && treeArr[par]->lchild == treeArr[leg] ){
+		return true;
+	}else{
+		return false;
+	}
+}
+

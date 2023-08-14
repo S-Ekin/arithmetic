@@ -40,9 +40,17 @@ void test(){
 	cout << endl;
 }
 
+void test2(){
+	BTNode *tree = new BTNode;
+	createBTByArr(tree);
+	bool res = isCompeleteBT(tree);
+	const char *tip = res ? "是完全" : "不是";
+	cout << tip << endl;
+}
+
 
 int main(){
-	test();
+	test2();
 	system("pause");
 	return 0;
 }

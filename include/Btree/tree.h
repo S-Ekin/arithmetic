@@ -17,3 +17,11 @@ typedef struct BTNode
 	BTNode():data(),lchild(nullptr), rchild(nullptr){}
 } BTNode;
 
+
+typedef struct TBTNode {
+	int data;
+	int ltag,rtag;
+	struct TBTNode *lchild;
+	struct TBTNode *rchild;
+	TBTNode():data(),lchild(nullptr),rchild(nullptr){}
+} TBTNode;
