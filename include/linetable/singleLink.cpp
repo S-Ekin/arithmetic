@@ -8,7 +8,7 @@
 #include <stdlib.h> //C语言库
 //一、 A和B是两个单链表（带表头结点），其中元素递增有序。设计一个算法，将A和B归并成一个按元素值非递减有序的链表C，C由A和B中的结点组成。
 
-// 尾插法和归并法
+//归并法
 int merge(LNode *A, LNode *B, LNode *&C){
 	LNode *p = A->next;  //来跟踪A的最小值结点。
 	LNode *q = B->next;	 //来跟踪B的最小值结点

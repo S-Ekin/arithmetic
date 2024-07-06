@@ -27,22 +27,23 @@ typedef struct
 
 typedef struct ArcNode // 边定义
 {
-	int adjvex;
+	int adjvex; //改变所指向的结点位置
 	int info;
-	struct ArcNode *nextArc;
+	struct ArcNode *nextArc; // 指向下一条边的指针
 } ArcNode;
 
 typedef struct // 顶点定义
 
 {
 	char data;
+	int count; // 用来统计顶点当前的入度，用于拓扑排序算法
 	ArcNode *firstArc; // 顶点的第一条边
 } VNode;
 
 typedef struct
 {
-	VNode adjList[Maxsize];
-	int n, e;
+	VNode adjList[Maxsize]; //邻接表
+	int n, e; // 顶点数和边数
 } AGraph;
 
 typedef struct
