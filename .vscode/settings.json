@@ -77,5 +77,6 @@
   //     "binaryArgs": []
   //   }
   // ],
-  "cmake.sourceDirectory": "F:/project c++/arithmetic"
+  "cmake.sourceDirectory": "F:/project c++/arithmetic",
+  "editor.tabSize": 2
 }
