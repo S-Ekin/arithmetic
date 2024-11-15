@@ -10,6 +10,8 @@
 #include "./travasel/recursion.cpp"
 #include "./travasel/levVist.cpp"
 #include "./problem/search.cpp"
+#include "./travasel/inTree.cpp"
+
 using std::cout;
 using std::endl;
 
@@ -48,9 +50,16 @@ void test2(){
 	cout << tip << endl;
 }
 
+void test3(){
+	TBTNode *tree = new TBTNode;
+	createBTByArr(tree);
+	createInThread(tree);
+	cout << tree->data << endl;
+}
+
 
 int main(){
-	test2();
+	test3();
 	system("pause");
 	return 0;
 }

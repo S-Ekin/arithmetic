@@ -4,9 +4,9 @@
  * @description:  二叉树得构建
  * @Last Modified time: 2023-07-04 14:38:46 
  */
-
 #include "./util.h"
 #include "../tree.h"
+#include <type_traits>
 #include <iostream>
 
 using std::cout;
@@ -29,16 +29,27 @@ void createBTByCin(BTNode *& tree){
 	}
 }
 
+// 定义概念，只允许 BTNode 和 TBTNode
+
+template <typename T>
+struct is_valid_node_type : std::false_type {};
+template <>
+struct is_valid_node_type<BTNode> : std::true_type {};
+template <>
+struct is_valid_node_type<TBTNode> : std::true_type {};
+
 // 通过数组建立完全二叉树
-void createBTByArr(BTNode *& tree){
+template <typename T>
+typename std::enable_if<is_valid_node_type<T>::value>::type
+ createBTByArr(T *& tree){
 	int arrleg = 17;
 	int arr[arrleg] = {1,2,3,4,0,6,7,8,9,0,11};
-	BTNode * nodeArr[arrleg] = {};
+	T * nodeArr[arrleg] = {};
 	nodeArr[0] = tree;
 
 	for (int i = 0; i < arrleg; i++)
 	{
-		BTNode *par = nodeArr[i];
+		T *par = nodeArr[i];
 		if (!par)
 		{
 			continue;
@@ -52,7 +63,7 @@ void createBTByArr(BTNode *& tree){
 		} else {
 			int val = arr[lcVal - 1];
 			if(val){
-				BTNode * lp = new BTNode;
+				T * lp = new T;
 				// BTNode * lp = nodeArr[lcVal - 1]; 报错 空指针
 				lp->data = val;
 				par->lchild = lp;
@@ -69,7 +80,7 @@ void createBTByArr(BTNode *& tree){
 		} else {
 			int val = arr[rcVal - 1];
 			if(val){
-				BTNode * rp = new BTNode;
+				T * rp = new T;
 				rp->data = val;
 				par->rchild = rp;
 				nodeArr[rcVal - 1] = rp;
