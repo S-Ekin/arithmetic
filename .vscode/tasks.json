@@ -5,6 +5,7 @@
             "label": "vsdebug",
             "command": "D:\\mingw64\\bin\\g++.exe",
             "args": [
+							  "-std=c++17",       // 编译选项
                 "-fdiagnostics-color=always",
                 "-g",
                 // "-fexec-charset=GBK", // 处理mingw中文编码问题
